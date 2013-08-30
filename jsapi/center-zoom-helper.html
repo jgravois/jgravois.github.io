@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7,IE=9">
+    <!--The viewport meta tag is used to improve the presentation and behavior of the samples 
+      on iOS devices-->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+    <title>map constructor tool</title>
+    <link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.3/js/dojo/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.3/js/esri/css/esri.css">
+    <style>
+      html, body {
+        height: 100%;
+        width: 100%;
+        margin: 0; 
+        padding: 0;
+        overflow:hidden;
+      }
+      #leftPane{
+        width:220px;
+        font-size:16px;
+      }
+      #map{
+        padding:0;
+      }
+      #search {
+        display: block;
+        position: absolute;
+        z-index: 2;
+        top: 20px;
+        left: 374px;
+      }      
+    </style>
+
+    <script>var dojoConfig = {parseOnLoad: true};</script>
+    <script src="http://serverapi.arcgisonline.com/jsapi/arcgis/3.3/"></script>
+    <script>
+      dojo.require("esri.map");
+      dojo.require("esri.dijit.Geocoder");
+	  dojo.require("dijit.layout.BorderContainer");
+      dojo.require("dijit.layout.ContentPane");
+
+      var map = null;
+	  var symbol;
+
+      function init() {
+        map = new esri.Map("map", {
+		  basemap: "streets",
+          center: [-73.99449, 40.72369],
+          zoom: 11
+        });
+        
+		geocoder = new esri.dijit.Geocoder({ 
+          map: map 
+        }, "search");
+        geocoder.startup();
+
+		symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 20,
+	      new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,
+	      new dojo.Color([255,0,0]), 1.5),
+	      new dojo.Color([0,255,0,0.25]));
+        
+        dojo.connect(map, "onExtentChange", displayGoods);
+		dojo.connect(map, "onClick", panCenter);
+      }
+
+	  function displayGoods() {
+	  	map.graphics.clear();
+
+	  	var point = map.extent.getCenter();
+	  	var point4326 = esri.geometry.webMercatorToGeographic(point);
+	  	var symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 20,
+	  			new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,
+	  			new dojo.Color([255, 0, 0]), 1.5),
+	  			new dojo.Color([0, 255, 0, 0.25]));
+
+	  	var graphic = new esri.Graphic(point, symbol);
+
+	  	map.graphics.add(graphic);
+
+	  	dojo.byId("center").innerHTML =
+	  		"<p>basemap: 'streets'," +
+	  		"<br/>center: [" +
+	  		dojo.number.format(point4326.x, {
+	  			places : 5
+	  		}) +
+	  		", " +
+	  		dojo.number.format(point4326.y, {
+	  			places : 5
+	  		}) +
+	  		"]," +
+	  		"<br/>zoom: " + map.getLevel();
+	  }
+      
+      function panCenter(evt) {
+	    map.graphics.clear();
+
+		var clickPoint = evt.mapPoint
+		var clickGraphic = new esri.Graphic(clickPoint, symbol);
+
+		map.graphics.add(clickGraphic);
+		map.centerAt(clickPoint);
+	  }
+
+      dojo.ready(init);
+    </script>
+  </head>
+  
+  <body class="claro">
+    <div data-dojo-type="dijit.layout.BorderContainer" 
+         data-dojo-props="gutters:true, design:'sidebar'" 
+         style="width:100%;height:100%;">
+
+      <div id="map" data-dojo-type="dijit.layout.ContentPane" 
+           data-dojo-props="region:'center'"></div>
+      <div id="search"></div>
+      <div id="leftPane" data-dojo-type="dijit.layout.ContentPane" 
+           data-dojo-props="region:'left'">
+
+      <div>
+        <p>
+		 this is a tool to help you determine a good center point and zoom level for constructing a new JS API map object.</br></br>
+		</p>
+		<p>
+          <span id="center"></span>
+        </p> 
+      </div>
+      </div>
+
+   </div>
+  </body >
+  
+  
+</html>
