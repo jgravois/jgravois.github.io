@@ -55,12 +55,12 @@ body {
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
   color: #6d6d6d;
 }
-
+/*336699*/
 a {
-  color: #336699;
+  color: #333333;
 }
 a:hover {
-  color: #000066;
+  color: #0066FF;
 }
 
 header {
@@ -251,8 +251,9 @@ h2 {
   margin-bottom: 8px;
 } 
 /*color: #d5000d;*/
+/*color: #666666;*/
 h3 {  
-  color: #666666;
+  color: #333333;
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 8px;
