@@ -1,0 +1,115 @@
+{
+	"type" : "FeatureCollection",
+	"features" : [{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-117.619262, 34.350087]
+			},
+			"properties" : {
+				"location" : "wrightwood, california",
+				"dateRange" : "06/1982-06/1991"
+			}
+		}, {
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-117.561168, 34.140487]
+			},
+			"properties" : {
+				"location" : "rancho cucamonga, california",
+				"dateRange" : "06/1991-09/2000"
+			}
+		}, {
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-117.188090, 32.768190]
+			},
+			"properties" : {
+				"location" : "san diego, california",
+				"dateRange" : "09/2000-12/2001"
+			}
+		}, {
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [11.244970, 43.765190]
+			},
+			"properties" : {
+				"location" : "florence, italy",
+				"dateRange" : "12/2001-06/2002"
+			}
+		}, {
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-117.720890, 34.095933]
+			},
+			"properties" : {
+				"location" : "claremont, california",
+				"dateRange" : "09/2002-09/2006"
+			}
+		}, {
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [144.944121, -37.814973]
+			},
+			"properties" : {
+				"location" : "melbourne, australia",
+				"dateRange" : "09/2006-01/2007"
+			}
+		}, {
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-43.0221, -73.283500]
+			},
+			"properties" : {
+				"location" : "ross sea, antarctica",
+				"dateRange" : "01/2007-03/2007"
+			}
+		}, {
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-121.480652, 38.570942]
+			},
+			"properties" : {
+				"location" : "midtown sacramento, california",
+				"dateRange" : "04/2007-07/2009"
+			}
+		}, {
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [153.095455, -27.448176]
+			},
+			"properties" : {
+				"location" : "brisbane, australia",
+				"dateRange" : "10/2008-12/2008"
+			}
+		}, {
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-118.146658, 33.783694]
+			},
+			"properties" : {
+				"location" : "long beach, california",
+				"dateRange" : "07/2009-11/2009"
+			}
+		}, {
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-117.188803, 34.049501]
+			},
+			"properties" : {
+				"location" : "redlands, california",
+				"dateRange" : "11/2009-?"
+			}
+		}
+	]
+}
