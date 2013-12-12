@@ -2,13 +2,13 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=7,IE=9">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!--The viewport meta tag is used to improve the presentation and behavior of the samples 
       on iOS devices-->
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
     <title>map constructor tool</title>
-    <link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.3/js/dojo/dijit/themes/claro/claro.css">
-    <link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.3/js/esri/css/esri.css">
+    <link rel="stylesheet" href="http://js.arcgis.com/3.8/js/dojo/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" href="http://js.arcgis.com/3.8/js/esri/css/esri.css">
     <style>
       html, body {
         height: 100%;
@@ -16,120 +16,164 @@
         margin: 0; 
         padding: 0;
         overflow:hidden;
-      }
-      #leftPane{
-        width:220px;
-        font-size:16px;
-      }
+      }      
       #map{
         padding:0;
+		height: 100%;
+        width: 100%;
       }
       #search {
         display: block;
         position: absolute;
         z-index: 2;
-        top: 20px;
-        left: 374px;
+        top: 10px;
+        left: 70px;
+	  }
+	  #info {
+        bottom: 20px;
+        color: #444;
+        height: auto;
+        font-family: arial;
+        left: 20px;
+        margin: 5px;
+        padding: 10px;
+        position: absolute;
+        text-align: left;
+        width: 280px;
+        z-index: 40;      
       }      
     </style>
+    <!--script>var dojoConfig = {parseOnLoad: true};</script-->
+    <script src="http://js.arcgis.com/3.8/"></script>
+    <script>	  
+	  require([
+	  		"esri/map", "esri/graphic", "esri/geometry/webMercatorUtils",
+	  		"esri/symbols/SimpleMarkerSymbol", "esri/symbols/SimpleLineSymbol",
+	  		"esri/dijit/Geocoder", "esri/dijit/BasemapGallery",
+	  		"dojo/parser",
 
-    <script>var dojoConfig = {parseOnLoad: true};</script>
-    <script src="http://serverapi.arcgisonline.com/jsapi/arcgis/3.3/"></script>
-    <script>
-      dojo.require("esri.map");
-      dojo.require("esri.dijit.Geocoder");
-	  dojo.require("dijit.layout.BorderContainer");
-      dojo.require("dijit.layout.ContentPane");
+	  		"dojo/_base/Color", "dojo/dom", "dojo/number",
+	  		"dijit/layout/ContentPane", "dijit/layout/ContentPane", "dojo/domReady!"
+	  	], function (
+	  		Map, Graphic, webMercatorUtils,
+	  		SimpleMarkerSymbol, SimpleLineSymbol,
+	  		Geocoder, BasemapGallery,
+	  		parser,
 
-      var map = null;
-	  var symbol;
+	  		Color, dom, number) {
+			
+	  	var map, symbol;
+		parser.parse();	  	
+	  	
+	  	map = new Map("map", {
+	  			basemap : "streets",
+	  			center : [-87.62786, 41.88108],
+	  			zoom : 9
+	  		});
 
-      function init() {
-        map = new esri.Map("map", {
-		  basemap: "streets",
-          center: [-73.99449, 40.72369],
-          zoom: 11
-        });
-        
-		geocoder = new esri.dijit.Geocoder({ 
-          map: map 
-        }, "search");
-        geocoder.startup();
+	  	symbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CROSS, 30,
+	  			new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+	  				new Color([255, 0, 0]), 4));
 
-		symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 20,
-	      new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,
-	      new dojo.Color([255,0,0]), 1.5),
-	      new dojo.Color([0,255,0,0.25]));
-        
-        dojo.connect(map, "onExtentChange", displayGoods);
-		dojo.connect(map, "onClick", panCenter);
-      }
+	  	geocoder = new Geocoder({
+	  			map : map
+	  		}, "search");
+	  	geocoder.startup();
 
-	  function displayGoods() {
-	  	map.graphics.clear();
+	  	var basemapGallery = new BasemapGallery({
+	  			showArcGISBasemaps : true,
+	  			map : map
+	  		}, "basemapGallery");
+	  	
+		basemapGallery.startup();
+	  	basemapGallery.on("selection-change", displayGoods);
 
-	  	var point = map.extent.getCenter();
-	  	var point4326 = esri.geometry.webMercatorToGeographic(point);
-	  	var symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 20,
-	  			new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,
-	  			new dojo.Color([255, 0, 0]), 1.5),
-	  			new dojo.Color([0, 255, 0, 0.25]));
+	  	map.on("extent-change", displayGoods);
+	  	map.on("click", panCenter);
+	  	//}
 
-	  	var graphic = new esri.Graphic(point, symbol);
+	  	function displayGoods() {
+	  		map.graphics.clear();
 
-	  	map.graphics.add(graphic);
+	  		var point102100 = map.extent.getCenter();
+	  		var point4326 = webMercatorUtils.webMercatorToGeographic(point102100);
 
-	  	dojo.byId("center").innerHTML =
-	  		"<p>basemap: 'streets'," +
-	  		"<br/>center: [" +
-	  		dojo.number.format(point4326.x, {
-	  			places : 5
-	  		}) +
-	  		", " +
-	  		dojo.number.format(point4326.y, {
-	  			places : 5
-	  		}) +
-	  		"]," +
-	  		"<br/>zoom: " + map.getLevel();
-	  }
-      
-      function panCenter(evt) {
-	    map.graphics.clear();
+	  		var graphic = new Graphic(point102100, symbol);
+	  		map.graphics.add(graphic);
 
-		var clickPoint = evt.mapPoint
-		var clickGraphic = new esri.Graphic(clickPoint, symbol);
+	  		var basemapString;
 
-		map.graphics.add(clickGraphic);
-		map.centerAt(clickPoint);
-	  }
+	  		if (basemapGallery.getSelected()) {
+	  			var basemapTitle = basemapGallery.getSelected().title
+	  				switch (basemapTitle) {
+	  				case "Streets":
+	  					basemapString = "streets";
+	  					break;
+	  				case "Imagery":
+	  					basemapString = "satellite";
+	  					break;
+	  				case "Imagery with Labels":
+	  					basemapString = "hybrid";
+	  					break;
+	  				case "Topographic":
+	  					basemapString = "topo";
+	  					break;
+	  				case "Light Gray Canvas":
+	  					basemapString = "gray";
+	  					break;
+	  				case "Oceans":
+	  					basemapString = "oceans";
+	  					break;
+	  				case "National Geographic":
+	  					basemapString = "national-geographic";
+	  					break;
+	  				case "OpenStreetMap":
+	  					basemapString = "osm";
+	  					break;
+	  				default:
+	  					basemapString = "this ain't a basemap constructor option";
+	  				}
 
-      dojo.ready(init);
+	  		} else
+	  			basemapString = 'streets';
+
+	  		dom.byId("center").innerHTML =
+	  			"<p>basemap: " + "'" + basemapString + "'," +
+	  			"<br/>center: [" +
+	  			number.format(point4326.x, {
+	  				places : 4
+	  			}) +
+	  			", " +
+	  			number.format(point4326.y, {
+	  				places : 4
+	  			}) +
+	  			"]," +
+	  			"<br/>zoom: " + map.getLevel();
+	  	}
+
+	  	function panCenter(evt) {
+	  		map.graphics.clear();			
+	  		map.graphics.add(new Graphic(evt.mapPoint, symbol));
+	  		map.centerAt(evt.mapPoint);
+	  	}
+	  });
     </script>
   </head>
   
   <body class="claro">
-    <div data-dojo-type="dijit.layout.BorderContainer" 
-         data-dojo-props="gutters:true, design:'sidebar'" 
-         style="width:100%;height:100%;">
-
-      <div id="map" data-dojo-type="dijit.layout.ContentPane" 
-           data-dojo-props="region:'center'"></div>
-      <div id="search"></div>
-      <div id="leftPane" data-dojo-type="dijit.layout.ContentPane" 
-           data-dojo-props="region:'left'">
-
-      <div>
-        <p>
-		 this is a tool to help you determine a good center point and zoom level for constructing a new JS API map object.</br></br>
-		</p>
-		<p>
-          <span id="center"></span>
-        </p> 
-      </div>
-      </div>
-
-   </div>
-  </body >
-  
-  
+    <div id="map">
+	    <div id="search"></div>
+		<div id="info" class="esriSimpleSlider">
+		feel free to copy/paste these values into the map constructor in your own app
+			<span id="center"></span>
+		</div>		
+		<div style="position:absolute; right:20px; top:10px; z-Index:999;">
+          <div data-dojo-type="dijit/TitlePane" 
+               data-dojo-props="title:'Switch Basemap', closable:false,  open:false">
+            <div data-dojo-type="dijit/layout/ContentPane" style="width:160px; height:600px; overflow:auto;">
+            <div id="basemapGallery" ></div></div>
+          </div>
+        </div>
+	</div>
+  </body>
 </html>
