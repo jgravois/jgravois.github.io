@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=10">
     <!--The viewport meta tag is used to improve the presentation and behavior of the samples 
       on iOS devices-->
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
@@ -40,10 +40,15 @@
         position: absolute;
         text-align: left;
         width: 280px;
-        z-index: 40;      
-      }      
+        z-index: 40;		
+      }
+	  .esriSimpleSlider {
+	    -webkit-user-select: all;
+		-moz-user-select: all;
+        -ms-user-select: all !important;  <!--wtf!-->		
+		user-select: all;
+	  }
     </style>
-    <!--script>var dojoConfig = {parseOnLoad: true};</script-->
     <script src="http://js.arcgis.com/3.8/"></script>
     <script>	  
 	  require([
@@ -67,7 +72,7 @@
 	  	
 	  	map = new Map("map", {
 	  			basemap : "streets",
-	  			center : [-87.62786, 41.88108],
+	  			center : [-87.6278, 41.8811],
 	  			zoom : 9
 	  		});
 
@@ -131,7 +136,7 @@
 	  					basemapString = "osm";
 	  					break;
 	  				default:
-	  					basemapString = "this ain't a basemap constructor option";
+	  					basemapString = "no bueno";
 	  				}
 
 	  		} else
@@ -164,7 +169,7 @@
     <div id="map">
 	    <div id="search"></div>
 		<div id="info" class="esriSimpleSlider">
-		feel free to copy/paste these values into the map constructor in your own app
+		<p>feel free to copy/paste these values into the map constructor in your own app</p>
 			<span id="center"></span>
 		</div>		
 		<div style="position:absolute; right:20px; top:10px; z-Index:999;">
