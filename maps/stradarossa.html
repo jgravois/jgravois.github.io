@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ArcGIS Feature Layer</title>
+    <title>where'd they come from?</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <!-- Load Leaflet from their CDN -->
@@ -58,10 +58,10 @@
         if (geojson.properties) {
           var popupText =  "<div style='overflow-y:scroll; max-height:200px;'>";
           for (prop in geojson.properties)
-            if (prop === "City") {
+            if (prop === "ARC_City") {
               var val = geojson.properties[prop];
               if (val) {
-                popupText += "<b>" + prop + "</b>: " + val + "<br>";
+                popupText += "<b>" + "Location" + "</b>: " + val.toLowerCase() + "<br>";
             }
           }
           popupText += "</div>";
