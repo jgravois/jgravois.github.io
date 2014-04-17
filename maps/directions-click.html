@@ -37,7 +37,8 @@
       Directions, GraphicsLayer,
       Graphic,
       on){        
-        //all requests to route.arcgis.com will proxy to the proxyUrl defined in this object.        
+        
+        /*all requests could/should be routed through a proxy to avoid making people sign in...
         urlUtils.addProxyRule({
           urlPrefix: "route.arcgis.com",  
           proxyUrl: "/sproxy/proxy.ashx"
@@ -45,7 +46,7 @@
         urlUtils.addProxyRule({
           urlPrefix: "traffic.arcgis.com",  
           proxyUrl: "/sproxy/proxy.ashx"
-        });
+        });*/
 
         var map = new Map("map", {
           basemap: "osm",
