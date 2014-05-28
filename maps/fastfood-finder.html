@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=10">
+    <!--The viewport meta tag is used to improve the presentation and behavior of the samples 
+      on iOS devices-->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+    <title>taco bell finder</title>
+    <link rel="stylesheet" href="http://js.arcgis.com/3.9/js/dojo/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" href="http://js.arcgis.com/3.9/js/esri/css/esri.css">
+    <style>
+      html, body {
+        height: 100%;
+        width: 100%;
+        margin: 0; 
+        padding: 0;
+        overflow:hidden;
+      }      
+      #map{
+        padding:0;
+        height: 100%;
+        width: 100%;
+      }
+      #LocateButton {
+        position: absolute;
+        top: 95px;
+        left: 20px;
+        z-index: 50;
+      }      
+      #info {
+        bottom: 20px;
+        color: #444;
+        height: auto;
+        font-family: arial;
+        left: 20px;
+        margin: 5px;
+        padding: 5px;
+        position: absolute;
+        text-align: left;
+        width: 275px;
+        z-index: 40;		
+      }
+      .esriSimpleSlider {
+        -webkit-user-select: all;
+        -moz-user-select: all;
+        -ms-user-select: all !important;  <!--wtf!-->		
+        user-select: all;
+      }
+    </style>    
+  </head>  
+  <body class="claro">
+    <div id="map">        
+        <div id="LocateButton"></div>
+        <div id="info" class="esriSimpleSlider">
+        <p><b>where is the closest taco bell?</b></p>
+            <span id="center"></span>
+        </div>		
+        <div style="position:absolute; right:20px; top:10px; z-Index:999;">
+          <div data-dojo-type="dijit/TitlePane" 
+               data-dojo-props="title:'Switch Basemap', closable:false,  open:false">
+            <div data-dojo-type="dijit/layout/ContentPane" style="width:160px; height:600px; overflow:auto;">
+            <div id="basemapGallery" ></div></div>
+          </div>
+        </div>
+    </div>
+    <script src="http://js.arcgis.com/3.9/"></script>
+    <script>	  
+/*
+to do:
+1. figure out why you can't specify outFields in geocoding request (to get the physical address without a reverse geocode
+3. get geocoder to return web mercator taco bells
+4. stop the duplicated text when someone clicks the locate button (probably by putting my own content in a seperate div and clearing it at the beginning)
+5. remove the route graphic each time someone locates without blowing away the locate graphic, (probably by using seperate graphics layer)
+6. add directions?
+*/      
+      require([
+      		"esri/map", "esri/dijit/BasemapGallery", "esri/tasks/RouteTask",
+      		"esri/tasks/RouteParameters", "esri/tasks/FeatureSet", "esri/SpatialReference",
+      		"esri/dijit/LocateButton", "esri/tasks/locator", "esri/config",
+      		"esri/geometry/webMercatorUtils", "esri/symbols/PictureMarkerSymbol", "esri/graphic",
+          "esri/symbols/SimpleLineSymbol", "esri/Color",
+      		"dojo/parser", "dojo/dom", "dojo/number",
+
+      		"dijit/layout/ContentPane", "dijit/layout/ContentPane", "dojo/domReady!"
+      	], function (
+      		Map, BasemapGallery, RouteTask,
+      		RouteParameters, FeatureSet, SpatialReference,
+      		LocateButton, Locator, esriConfig,
+      		webMercatorUtils, PictureMarkerSymbol, Graphic,
+          SimpleLineSymbol, Color,
+      		parser, dom, number) {
+        
+        var addressString;
+        var distance;
+        
+      	parser.parse();
+        
+      	var map = new Map("map", {
+      			basemap : "osm",
+      			center : [-73.9317, 40.7058],
+      			zoom : 15
+      		});
+          
+        var basemapGallery = new BasemapGallery({
+      				showArcGISBasemaps : true,
+      				map : map
+      	  }, "basemapGallery");
+
+      	basemapGallery.startup();
+
+      	var geoLocate = new LocateButton({
+      				map : map
+      	}, "LocateButton");
+      	
+        geoLocate.startup();
+
+      	geoLocate.on("load", function () {
+      			geoLocate.locate();
+      		});
+        geoLocate.on("locate", locationFound);
+        
+        var logo = new PictureMarkerSymbol("http://d75822.medialib.glogster.com/media/e3/e39d09bd6536ef2e836e7253ac6aa7ca417c189091fed84d378bf2aaa50366da/old-taco-bell-logo-png.png", 40, 20)
+
+      	var findTacoBell = new Locator("http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer");
+        findTacoBell.outSpatialReference = map.spatialReference;
+        findTacoBell.on("address-to-locations-complete", tacoBellFound);
+
+        var tacoStops = new FeatureSet();
+      	var routeTacoBell = new RouteTask("http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Network/USA/NAServer/route");
+      	routeTacoBell.on("solve-complete", feedMe);
+      	routeTacoBell.on("error", ouch);
+
+      	function locationFound(evt) {
+      		//map.graphics.clear();
+          tacoStops.features = [];
+          
+          var locationGraphic = new Graphic(evt.graphic.geometry);
+      		tacoStops.features.push(locationGraphic);
+
+      		var address = {
+            "address" : "Taco Bell", 
+            "distance": 50000, 
+            "location": evt.graphic.geometry,
+            "maxLocations": 5
+            
+            //these two don't work
+            //"outFields": '*'
+            //"outSR": map.spatialReference ??
+            };
+    
+      		var params = {
+      			address : address            
+            //tried here too
+            //outFields : "[*]"
+      			
+            //based on the doc, i thought all extra parameters would go here
+            //maxLocations: 3,
+            //forStorage : true
+      		};
+      		findTacoBell.addressToLocations(params);
+
+      	}
+      	function tacoBellFound(evt) {
+      		//addressString = evt.addresses[0].attributes[something]
+          //console.log(evt.addresses[0]);
+          
+          var routeGraphic = new Graphic(evt.addresses[0].location);
+
+      		var webMerTaco = webMercatorUtils.geographicToWebMercator(evt.addresses[0].location);
+      		var tacoGraphic = new Graphic(webMerTaco, logo);
+      		map.graphics.add(tacoGraphic);
+
+      		tacoStops.features.push(routeGraphic);
+
+      		var routeParams = new RouteParameters();
+      		routeParams.stops = tacoStops;
+
+      		routeParams.outSpatialReference = new SpatialReference({
+      				wkid : 3857
+      			});
+      		routeTacoBell.solve(routeParams);
+      	}
+
+      	function feedMe(evt) {
+      		distance = number.format(evt.result.routeResults[0].route.attributes.Total_Time, {
+            places : 0
+          });
+                  
+          dom.byId("info").innerHTML += "its about " + distance + " minutes away ";
+          var routeSym = new SimpleLineSymbol(SimpleLineSymbol.STYLE_LONGDASHDOT,
+            new Color([0,255,0, 0.5]), 15)
+          var routeGraphic = new Graphic(evt.result.routeResults[0].route.geometry, routeSym);
+          map.graphics.add(routeGraphic);
+          map.setExtent(routeGraphic.geometry.getExtent(), true);
+       	}
+      	function ouch(e) {
+      		alert(e);
+      	}
+      });
+    </script>
+  </body>
+</html>
