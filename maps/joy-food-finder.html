@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -69,17 +70,14 @@
 /*
 to do:
 1. figure out why you can't specify outFields in geocoding request (to get the physical address without a reverse geocode
-3. get geocoder to return web mercator taco bells
-4. stop the duplicated text when someone clicks the locate button (probably by putting my own content in a seperate div and clearing it at the beginning)
-5. remove the route graphic each time someone locates without blowing away the locate graphic, (probably by using seperate graphics layer)
-6. add directions?
+2. get geocoder to return web mercator taco bells
 */      
       require([
       		"esri/map", "esri/dijit/BasemapGallery", "esri/tasks/RouteTask",
       		"esri/tasks/RouteParameters", "esri/tasks/FeatureSet", "esri/SpatialReference",
       		"esri/dijit/LocateButton", "esri/tasks/locator", "esri/config",
       		"esri/geometry/webMercatorUtils", "esri/symbols/PictureMarkerSymbol", "esri/graphic",
-          "esri/symbols/SimpleLineSymbol", "esri/Color",
+          "esri/symbols/SimpleMarkerSymbol", "esri/symbols/SimpleLineSymbol", "esri/Color",
       		"dojo/parser", "dojo/dom", "dojo/number",
 
       		"dijit/layout/ContentPane", "dijit/layout/ContentPane", "dojo/domReady!"
@@ -88,40 +86,56 @@ to do:
       		RouteParameters, FeatureSet, SpatialReference,
       		LocateButton, Locator, esriConfig,
       		webMercatorUtils, PictureMarkerSymbol, Graphic,
-          SimpleLineSymbol, Color,
+          SimpleMarkerSymbol, SimpleLineSymbol, Color,
       		parser, dom, number) {
         
         var addressString;
-        var distance;
+        
+        //map.on("click" seems to be firing twice in a row after 3.6...
+        var stupidCheck = true;
         
       	parser.parse();
-        
       	var map = new Map("map", {
       			basemap : "osm",
-      			center : [-73.9317, 40.7058],
-      			zoom : 15
+      			//-73.9317, 40.7058  (ny)     -118.24390, 34.05349 (la)
+            center : [-73.9317, 40.7058],
+      			zoom : 17
       		});
           
         var basemapGallery = new BasemapGallery({
       				showArcGISBasemaps : true,
       				map : map
-      	  }, "basemapGallery");
-
+      	}, "basemapGallery");
       	basemapGallery.startup();
 
       	var geoLocate = new LocateButton({
       				map : map
       	}, "LocateButton");
-      	
         geoLocate.startup();
 
       	geoLocate.on("load", function () {
       			geoLocate.locate();
       		});
-        geoLocate.on("locate", locationFound);
+        geoLocate.on("locate", grabLocation);
+        
+        map.on("click", function(evt) {
+          if (stupidCheck == true) {
+            map.graphics.clear();
+            var startGraphic = new Graphic(evt.mapPoint, startSym);
+      		  map.graphics.add(startGraphic);
+            
+            locationFound(evt.mapPoint);
+            stupidCheck = false;
+          }
+        });
         
         var logo = new PictureMarkerSymbol("http://d75822.medialib.glogster.com/media/e3/e39d09bd6536ef2e836e7253ac6aa7ca417c189091fed84d378bf2aaa50366da/old-taco-bell-logo-png.png", 40, 20)
 
+        var startSym = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_SQUARE, 10,
+          new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+          new Color([255,0,0]), 1),
+          new Color([0,255,0,0.25]));
+        
       	var findTacoBell = new Locator("http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer");
         findTacoBell.outSpatialReference = map.spatialReference;
         findTacoBell.on("address-to-locations-complete", tacoBellFound);
@@ -131,17 +145,20 @@ to do:
       	routeTacoBell.on("solve-complete", feedMe);
       	routeTacoBell.on("error", ouch);
 
-      	function locationFound(evt) {
-      		//map.graphics.clear();
+        function grabLocation(evt) {
+          locationFound(evt.graphic.geometry);
+        }
+        
+      	function locationFound(locGeom) {
           tacoStops.features = [];
           
-          var locationGraphic = new Graphic(evt.graphic.geometry);
+          var locationGraphic = new Graphic(locGeom);
       		tacoStops.features.push(locationGraphic);
 
       		var address = {
             "address" : "Taco Bell", 
             "distance": 50000, 
-            "location": evt.graphic.geometry,
+            "location": locGeom,
             "maxLocations": 5
             
             //these two don't work
@@ -162,11 +179,8 @@ to do:
 
       	}
       	function tacoBellFound(evt) {
-      		//addressString = evt.addresses[0].attributes[something]
-          //console.log(evt.addresses[0]);
-          
+      		//addressString = evt.addresses[0].attributes[something];
           var routeGraphic = new Graphic(evt.addresses[0].location);
-
       		var webMerTaco = webMercatorUtils.geographicToWebMercator(evt.addresses[0].location);
       		var tacoGraphic = new Graphic(webMerTaco, logo);
       		map.graphics.add(tacoGraphic);
@@ -176,26 +190,26 @@ to do:
       		var routeParams = new RouteParameters();
       		routeParams.stops = tacoStops;
 
-      		routeParams.outSpatialReference = new SpatialReference({
-      				wkid : 3857
-      			});
+      		routeParams.outSpatialReference = new SpatialReference({wkid : 3857});
       		routeTacoBell.solve(routeParams);
       	}
 
       	function feedMe(evt) {
-      		distance = number.format(evt.result.routeResults[0].route.attributes.Total_Time, {
+      		var distance = number.format(evt.result.routeResults[0].route.attributes.Total_Time, {
             places : 0
           });
                   
-          dom.byId("info").innerHTML += "its about " + distance + " minutes away ";
+          dom.byId("info").innerHTML = "its about " + distance + " minutes away ";
           var routeSym = new SimpleLineSymbol(SimpleLineSymbol.STYLE_LONGDASHDOT,
             new Color([0,255,0, 0.5]), 15)
           var routeGraphic = new Graphic(evt.result.routeResults[0].route.geometry, routeSym);
           map.graphics.add(routeGraphic);
           map.setExtent(routeGraphic.geometry.getExtent(), true);
+          stupidCheck = true;
        	}
       	function ouch(e) {
-      		alert(e);
+      		alert("we tried but: " + e.error.message);
+          stupidCheck = true;
       	}
       });
     </script>
