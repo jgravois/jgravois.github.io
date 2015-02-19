@@ -1,0 +1,34 @@
+.arcgisSearch {
+  margin-top: 6px;
+  display: inline-block;
+  padding: 0px 0px;
+  border-radius: 1px;
+}
+
+.arcgisSearch .searchBtn {
+  padding: 5px 5px;
+  border-radius: 1px;
+  border: 1px solid #999
+}
+
+.arcgisSearch .searchCollapsed .searchSubmit {
+  -webkit-border-radius: 1px;
+  border-radius: 1px;
+}
+
+element.style {
+  color: #999;
+}
+
+.arcgisSearch .searchIcon {
+  font-size: 22px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  display: inline-block;
+  color: #999;
+}
+
+.arcgisSearch .searchGroup .searchInput {
+  height: 18px;
+}
