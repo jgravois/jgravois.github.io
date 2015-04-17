@@ -1,0 +1,45 @@
+to do:
+
+add a grunt 'watch' task to help with continuous integration
+
+figure out the best way to update style.css link tag in html files nested a level lower
+
+figure out how to inject a custom HTML partial into a page's build
+(for the calendar)
+
+ /letters/index.html page for xmas and other bloggy things
+ /presentations/ page as well
+
+figure out the best way to handle completely standalone pages.  i'm assuming using build process to copy/paste?
+
+footer to credit ngoldman style.css (and move octocat)
+
+get duplicate content out of presentations repo
+
+pages:
+rialto hs prez
+xmas 13
+xmas 14
+nyc
+bike repair
+external presentations
+individual maps
+
+done:
+relative image links in markdown - check
+  no spaces in filename allowed
+
+.gitignore file
+
+fix spaces in peru image filenames
+
+pages
+home
+peru
+maps
+xmas 2011
+best man
+presentations
+
+
+
