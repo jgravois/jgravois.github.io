@@ -32,46 +32,47 @@
     <a href="https://github.com/esri/esri-leaflet"><img style="z-index: 1000; position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
 
     <div class="demo-controls">
-      <h1 id="title">Redlands Strada Rossa Participants</h1>
+      <h1 id="title">Where did the Strada Rossa II participants come from?</h1>
     </div>
 
     <script>
-      var map = L.map('map').setView([34.2,-117.9], 8);
+      var map = L.map('map').setView([38.2,-102.4], 3);
 
       // Add ArcGIS Online Basemap
-      L.esri.basemapLayer("DarkGray").addTo(map);
-      L.esri.basemapLayer("DarkGrayLabels").addTo(map);
+      L.esri.basemapLayer("Gray").addTo(map);
+      L.esri.basemapLayer("GrayLabels").addTo(map);
 
       var layerFS;
       addFeatureLayer();
 
       function addFeatureLayer() {
         // Add ArcGIS Online feature service
-        var featureServiceUrl = "//services.arcgis.com/uCXeTVveQzP4IIcx/arcgis/rest/services/StradaRossa/FeatureServer/0";
+        var featureServiceUrl = "//services.arcgis.com/uCXeTVveQzP4IIcx/arcgis/rest/services/StradaRossaII/FeatureServer/0";
         if (layerFS) {
           removeFeatureLayer();
         }
         layerFS = L.esri.featureLayer({
           url: featureServiceUrl,
-          onEachFeature: createPopup
+          pointToLayer: function (geojson, latlng) {
+            return L.circleMarker(latlng, {
+              color: 'green',
+              weight: 2,
+              opacity: 0.85,
+              fillOpacity: 0.5
+            });
+          }
         }).addTo(map);
       }
 
-      function createPopup(geojson,layer) {
-        // Show all data
-        if (geojson.properties) {
-          var popupText =  "<div style='overflow-y:scroll; max-height:200px;'>";
-          for (prop in geojson.properties)
-            if (prop === "ARC_City") {
-              var val = geojson.properties[prop];
-              if (val) {
-                popupText += val.toLowerCase();
-            }
-          }
-          popupText += "</div>";
-          layer.bindPopup(popupText);
-        }
-      }
+      layerFS.on('mouseover', function(e) {
+        var where = e.layer.feature.properties.City.toLowerCase() + ', ' + e.layer.feature.properties.Region.toLowerCase()
+        // console.log(where)
+        document.getElementById('title').innerHTML = where;
+      });
+
+      layerFS.on('mouseout', function(e) {
+        document.getElementById('title').innerHTML = 'Where did the Strada Rossa II participants come from?';
+      });
 
       function removeFeatureLayer() {
         if (layerFS) {
