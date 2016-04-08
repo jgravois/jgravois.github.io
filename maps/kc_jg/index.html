@@ -1,26 +1,17 @@
 <!--
 to do:
-change color scheme/fonts
-add states
-add places we're planning to go
-  australia
-  new zealand
-  belize
-  costa rica
-  india
-  chile
-
-add dots
+add popups
+write a letter
 -->
 
 <!DOCTYPE html>
 <html>
 <head>
-  <title>kcb + jg - year 1</title>
-  <meta name="description" content="Demo 12: JavaScript">
+  <title>kcb & jg - 4/10/2016</title>
+  <meta name="description" content="my love">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <link href='https://fonts.googleapis.com/css?family=Quattrocento|Oswald' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Yeseva+One|Merriweather+Sans' rel='stylesheet' type='text/css'>
 
   <!-- Load Leaflet from CDN-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/leaflet/1.0.0-beta.2/leaflet.css" />
@@ -63,14 +54,14 @@ add dots
     }
 
     body {
-      font-family: 'Quattrocento', serif;
+      font-family: 'Merriweather Sans', serif;
       display: flex;
       flex-direction: column;
       background: beige;
     }
 
     h1, h2, h3, h4, h5, h6 {
-      font-family: 'Oswald', sans-serif;
+      font-family: 'Yeseva One', sans-serif;
     }
 
     #wrapper {
@@ -82,11 +73,11 @@ add dots
     #sidebar {
       padding: 1rem;
       flex: 1 1 auto;
-      border-right: 4px solid #2c3e50;
+      border-right: 4px solid #37424A;
       max-width: 30rem;
       overflow: auto;
-      background: #34495e;
-      color: #ecf0f1;
+      background: #37424A;
+      color: #F2D653;
     }
 
     #sidebar :first-child {
@@ -112,16 +103,16 @@ add dots
       padding: 1rem;
       flex: 0 0 auto;
       border-bottom: 4px solid #2c3e50;
-      background: #34495e;
-      color: #ecf0f1;
+      background: #37424A;
+      color: #F2D653;
     }
 
     #footer {
       border-top: 4px solid #2c3e50;
       padding: 1rem;
       flex: 0 0 auto;
-      background: #34495e;
-      color: #ecf0f1;
+      background: #37424A;
+      color: #F2D653;
     }
 
     a {
@@ -176,12 +167,12 @@ add dots
 </head>
 <body>
   <div id="header">
-    <h1 class="no-margin">our adventures, so far</h1>
+    <h1 class="no-margin">our travels together, so far...</h1>
   </div>
   <div id="wrapper">
     <div id="sidebar">
       <h2 class="no-margin"></h2>
-      <p>this is only the beginning...</p>
+        <p>i knew i loved you before i even met you.</p>
     </div>
     <div id="map">
       <div id="map-container"></div>
@@ -191,7 +182,7 @@ add dots
     </div>
   </div>
   <div id="footer">
-    <small>for <a href='https://www.instagram.com/kaciebig/'>@kaciebig</a> from <a href='https://twitter.com/geogangster/'>@geogangster</a> with love.</small>
+    <small>to <a href='https://www.instagram.com/kaciebig/'>@kaciebig</a> from <a href='https://twitter.com/geogangster/'>@geogangster</a> with love.</small>
   </div>
   <script src='./js/app.js'></script>
 </body>
