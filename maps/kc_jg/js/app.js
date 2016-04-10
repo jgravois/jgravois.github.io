@@ -4,10 +4,10 @@ var southWest = L.latLng(-85, -180),
 
 var map = L.map("map", {
   noWrap: true,
-  minZoom: 3,
+  minZoom: 1,
   maxZoom: 8,
   maxBounds: worldBounds
-}).setView([37.75, -122.23], 3);
+}).setView([37.75, -122.23], 1);
 
 L.esri.basemapLayer("Gray", {
   noWrap: true
@@ -38,7 +38,7 @@ L.esri.featureLayer({
 
 L.esri.featureLayer({
   url: 'http://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer/3',
-  where: "STATE_NAME IN('California', 'New Jersey', 'Hawaii', 'Utah', 'Washington', 'Oregon', 'Nevada', 'Louisiana', 'Florida', 'Georgia', 'Colorado')",
+  where: "STATE_NAME IN('California', 'New Jersey', 'Hawaii', 'Utah', 'Washington', 'Oregon', 'Nevada', 'Louisiana', 'Florida', 'Georgia')",
   style: {
     color: '#37424A',
     weight: 1.5
