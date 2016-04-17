@@ -46,7 +46,7 @@ L.esri.featureLayer({
 
 L.esri.featureLayer({
   url: 'http://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer/3',
-  where: "STATE_NAME IN('California', 'New Jersey', 'Hawaii', 'Utah', 'Washington', 'Oregon', 'Nevada', 'Louisiana', 'Florida', 'Georgia')",
+  where: "STATE_NAME IN('California', 'New Jersey', 'Hawaii', 'Utah', 'Washington', 'Oregon', 'Nevada', 'Louisiana', 'Florida', 'Georgia', 'Arizona')",
   style: {
     color: '#37424A',
     weight: 1.5
