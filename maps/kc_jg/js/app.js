@@ -6,8 +6,16 @@ var map = L.map("map", {
   noWrap: true,
   minZoom: 1,
   maxZoom: 8,
-  maxBounds: worldBounds
+  maxBounds: worldBounds,
+  scrollWheelZoom: false
 }).setView([37.75, -122.23], 1);
+
+map.on("click", accidentalScroll);
+
+function accidentalScroll() {
+  map.scrollWheelZoom.enable();
+  map.off("click", accidentalScroll);
+}
 
 L.esri.basemapLayer("Gray", {
   noWrap: true
