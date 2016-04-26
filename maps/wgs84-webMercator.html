@@ -2,16 +2,16 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <!--The viewport meta tag is used to improve the presentation and behavior of the samples 
+    <!--The viewport meta tag is used to improve the presentation and behavior of the samples
       on iOS devices-->
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
     <title>back and forth</title>
 
-    <script src="http://js.arcgis.com/3.8/"></script>
+    <script src="https://js.arcgis.com/3.8/"></script>
     <script>
       var queryTask, query;
       require([
-        "esri/geometry/webMercatorUtils", "esri/geometry/Point", "esri/SpatialReference", 
+        "esri/geometry/webMercatorUtils", "esri/geometry/Point", "esri/SpatialReference",
         "dojo/dom", "dojo/on", "dojo/domReady!"
       ], function(
         webMercatorUtils, Point, SpatialReference,
@@ -27,38 +27,38 @@
           //define X and Y based on their position in the array
           var x = Number(coordinateArray[0]);
           var y = Number(coordinateArray[1]);
-          
+
           //define an esri geometry object based on the coordinates
           var oldGeom = new Point(x,y, new SpatialReference({ wkid: 4326 }));
-          
+
           //convert this point to web mercator
           var geom = webMercatorUtils.geographicToWebMercator(oldGeom);
-          
+
           //write the output coordinate values on the page
-          dom.byId("coor-info").innerHTML = geom.x.toPrecision(8) + ", " + geom.y.toPrecision(7);      
+          dom.byId("coor-info").innerHTML = geom.x.toPrecision(8) + ", " + geom.y.toPrecision(7);
         }
-        
+
         //repeat
         function convertWebMercatorToWGS84() {
           var coordinateArray = dom.byId("wm").value.split(",");
           var x = Number(coordinateArray[0]);
           var y = Number(coordinateArray[1]);
-          
+
           var oldGeom = new Point(x,y, new SpatialReference({ wkid: 3857 }));
           var geom = webMercatorUtils.webMercatorToGeographic(oldGeom);
-          
-          dom.byId("coor-info").innerHTML = geom.x.toPrecision(8) + ", " + geom.y.toPrecision(7);              
-        }          
+
+          dom.byId("coor-info").innerHTML = geom.x.toPrecision(8) + ", " + geom.y.toPrecision(7);
+        }
       });
     </script>
   </head>
   <body>
     <input type="text" id="wgs" value="-117,34">
-    <input id="wgs-wm" type="button" value="web mercator">       
+    <input id="wgs-wm" type="button" value="web mercator">
     <br />
     <input type="text" id="wm" value="-13024380, 4028802">
     <input id="wm-wgs" type="button" value="long/lat">
-    <br />    
+    <br />
     <div id="coor-info" style="padding:5px; margin:5px; background-color:#eee;">
     </div>
   </body>

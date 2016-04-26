@@ -7,8 +7,8 @@
       on iOS devices-->
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
     <title>taco bell finder</title>
-    <link rel="stylesheet" href="http://js.arcgis.com/3.9/js/dojo/dijit/themes/claro/claro.css">
-    <link rel="stylesheet" href="http://js.arcgis.com/3.9/js/esri/css/esri.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.9/js/dojo/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.9/js/esri/css/esri.css">
     <style>
       html, body {
         height: 100%;
@@ -64,7 +64,7 @@
           </div>
         </div>
     </div>
-    <script src="http://js.arcgis.com/3.9/"></script>
+    <script src="https://js.arcgis.com/3.9/"></script>
     <script>
 /*
 to do:
@@ -128,19 +128,19 @@ to do:
           }
         });
 
-        var logo = new PictureMarkerSymbol("http://d75822.medialib.glogster.com/media/e3/e39d09bd6536ef2e836e7253ac6aa7ca417c189091fed84d378bf2aaa50366da/old-taco-bell-logo-png.png", 40, 20)
+        var logo = new PictureMarkerSymbol("https://d75822.medialib.glogster.com/media/e3/e39d09bd6536ef2e836e7253ac6aa7ca417c189091fed84d378bf2aaa50366da/old-taco-bell-logo-png.png", 40, 20)
 
         var startSym = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_SQUARE, 10,
           new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
           new Color([255,0,0]), 1),
           new Color([0,255,0,0.25]));
 
-      	var findTacoBell = new Locator("http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer");
+      	var findTacoBell = new Locator("https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer");
         findTacoBell.outSpatialReference = map.spatialReference;
         findTacoBell.on("address-to-locations-complete", tacoBellFound);
 
         var tacoStops = new FeatureSet();
-      	var routeTacoBell = new RouteTask("http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Network/USA/NAServer/route");
+      	var routeTacoBell = new RouteTask("https://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Network/USA/NAServer/route");
       	routeTacoBell.on("solve-complete", feedMe);
       	routeTacoBell.on("error", ouch);
 

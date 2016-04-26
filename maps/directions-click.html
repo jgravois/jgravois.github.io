@@ -4,8 +4,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
     <title>Directions Widget</title>
-    <link rel="stylesheet" href="http://js.arcgis.com/3.8/js/dojo/dijit/themes/claro/claro.css">
-    <link rel="stylesheet" href="http://js.arcgis.com/3.8/js/esri/css/esri.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.8/js/dojo/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.8/js/esri/css/esri.css">
     <style>
       html, body, #map {
         height:100%;
@@ -22,29 +22,29 @@
     </style>
 
     <script>var dojoConfig = { parseOnLoad: true };</script>
-    <script src="http://js.arcgis.com/3.9/"></script>
+    <script src="https://js.arcgis.com/3.9/"></script>
     <script>
       require([
-      "esri/urlUtils", "esri/map", 
+      "esri/urlUtils", "esri/map",
       "esri/dijit/Directions", "esri/layers/GraphicsLayer",
       "esri/graphic",
-      
+
       "dojo/on",
-      
+
       "dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dojo/domReady!"],
       function(
-      urlUtils, Map, 
+      urlUtils, Map,
       Directions, GraphicsLayer,
       Graphic,
-      on){        
-        
+      on){
+
         /*all requests could/should be routed through a proxy to avoid making people sign in...
         urlUtils.addProxyRule({
-          urlPrefix: "route.arcgis.com",  
+          urlPrefix: "route.arcgis.com",
           proxyUrl: "/sproxy/proxy.ashx"
         });
         urlUtils.addProxyRule({
-          urlPrefix: "traffic.arcgis.com",  
+          urlPrefix: "traffic.arcgis.com",
           proxyUrl: "/sproxy/proxy.ashx"
         });*/
 
@@ -63,20 +63,20 @@
         directions.on("load", function() {
           //adjust map div after the widget has loaded so our checkbox doesn't shift things
           map.reposition();
-        });        
-        
+        });
+
         /* we can't do this at the moment, because the event is triggered when solving the route as well
         directions.on("directions-clear", function() {
-            directions.removeStops();         
+            directions.removeStops();
         });
         */
-        
+
         directions.on("directions-finish", function() {
             clickGraphicsLayer.clear();
-        });                
-        
-        var checkbox = document.getElementById("graphicStops");        
-        
+        });
+
+        var checkbox = document.getElementById("graphicStops");
+
         //create an event listener that hooks up click events and turns them off when people interact with the checkbox
         checkbox.onchange = function() {
             if (checkbox.checked == false) {
@@ -85,32 +85,32 @@
             else
                addGraphics = map.on('click', addGraphicPoints);
         }
-        
+
         //wire up the map click event listener by default
         var addGraphics = map.on('click', addGraphicPoints);
-        
-        //create a separate graphics layer to display stops before the route has been solved 
+
+        //create a separate graphics layer to display stops before the route has been solved
         var clickGraphicsLayer = new GraphicsLayer();
-        map.addLayer(clickGraphicsLayer);       
-        
-        function addGraphicPoints(evt){            
-            
-            var existingBlank = false;            
-            var graphic = new Graphic(evt.mapPoint, directions.stopSymbol);            
-            
-            for (var i=0; i <= directions.stops.length -1; i++) {                
-                if (directions.stops[i].name === "") {           
+        map.addLayer(clickGraphicsLayer);
+
+        function addGraphicPoints(evt){
+
+            var existingBlank = false;
+            var graphic = new Graphic(evt.mapPoint, directions.stopSymbol);
+
+            for (var i=0; i <= directions.stops.length -1; i++) {
+                if (directions.stops[i].name === "") {
                     //update an existing stop and break out of the loop if you encounter one without an address
-                    directions.updateStop(graphic, i);                    
+                    directions.updateStop(graphic, i);
                     clickGraphicsLayer.add(graphic);
                     existingBlank = true;
                     break;
                 }
             }
             //if all existing stops have an address supplied, add a new one
-            if (existingBlank == false)                
+            if (existingBlank == false)
                 directions.addStop(graphic);
-                clickGraphicsLayer.add(graphic);                
+                clickGraphicsLayer.add(graphic);
         }
       });
     </script>
@@ -119,15 +119,15 @@
     <div data-dojo-type="dijit.layout.BorderContainer" data-dojo-props="design:'headline', gutters:false" style="width:100%;height:100%;">
       <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'right'" style="width:200px;">
         <div id="akshay">
-        <label for="graphicStops">            
+        <label for="graphicStops">
                 <input type="checkbox" id="graphicStops" name="graphicStops" checked=true>
-                <span>add stops graphically</span>            
-            </label> 
+                <span>add stops graphically</span>
+            </label>
         </div>
         <div id="dir"></div>
       </div>
-      <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'center'" id="map">                 
-          
+      <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'center'" id="map">
+
       </div>
    </div>
   </body>

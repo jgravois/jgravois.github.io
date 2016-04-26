@@ -7,7 +7,7 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
     <title>Parcel Locator</title>
 
-    <link rel="stylesheet" href="http://js.arcgis.com/3.8/js/esri/css/esri.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.8/js/esri/css/esri.css">
     <style>
       html, body, #map {
         height: 100%;
@@ -18,22 +18,22 @@
     </style>
 
     <script>var dojoConfig = { parseOnLoad: true };</script>
-    <script src="http://js.arcgis.com/3.8/"></script>
+    <script src="https://js.arcgis.com/3.8/"></script>
     <script>
       var extent;
-      require([        
-        "esri/urlUtils", "esri/arcgis/utils", 
+      require([
+        "esri/urlUtils", "esri/arcgis/utils",
         "esri/geometry/Extent",
 
         "dojo/domReady!"
-      ], function(        
+      ], function(
         urlUtils, arcgisUtils,
         Extent
       ) {
-        var urlObject = urlUtils.urlToObject(document.location.href);        
+        var urlObject = urlUtils.urlToObject(document.location.href);
         var webmapId = urlObject.query.webmap;
         extent = urlObject.query.extent;
-        
+
         var extentArray = extent.split(',')
         xmin = parseFloat(extentArray[0]);
         ymin = parseFloat(extentArray[1]);
@@ -45,14 +45,14 @@
           "spatialReference":{"wkid":4326}
         });
 
-        arcgisUtils.createMap(webmapId,"map").then(function(response){          
+        arcgisUtils.createMap(webmapId,"map").then(function(response){
             response.map.setExtent(extent);
             var map = response.map;
         });
-        
+
       });
     </script>
-  </head>  
+  </head>
   <body class="claro">
     <div id="map"></div>
   </body>

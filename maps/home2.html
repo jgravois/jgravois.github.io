@@ -1,26 +1,26 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
-<html> 
-  <head> 
-    <title>example 2 - there's no place like home</title> 
-    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=ABQIAAAAoWvECQac6XNEKQUC8ExJzxRodToCb6OCTBomhj7x1wZb6DlIHhRXulgZ1Eof3SKxjmc7BLnkNKQdrw" type="text/javascript"></script> 
-  </head> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>example 2 - there's no place like home</title>
+    <script src="https://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=ABQIAAAAoWvECQac6XNEKQUC8ExJzxRodToCb6OCTBomhj7x1wZb6DlIHhRXulgZ1Eof3SKxjmc7BLnkNKQdrw" type="text/javascript"></script>
+  </head>
 some places i've called home
-  <body onunload="GUnload()"> 
-    <div id="map" style="width: 960px; height: 512px"></div> 
-    <a href="http://johngravois.com">back home</a> 
-    <script type="text/javascript"> 
+  <body onunload="GUnload()">
+    <div id="map" style="width: 960px; height: 512px"></div>
+    <a href="https://johngravois.com">back home</a> 
+    <script type="text/javascript">
     //<![CDATA[
- 
+
     if (GBrowserIsCompatible()) {
- 
- 
+
+
       // === Create a custom Control ===
       var labelContainer;
- 
+
       function LabelControl() {  }
       LabelControl.prototype = new GControl();
- 
+
       LabelControl.prototype.initialize = function(map) {
         labelContainer = document.createElement("div");
         labelContainer.style.overflow="auto";
@@ -29,29 +29,29 @@ some places i've called home
         labelContainer.style.height="140px";
         labelContainer.style.width="120px";
         labelContainer.style.paddingLeft="15px";
- 
+
         map.getContainer().appendChild(labelContainer);
         return labelContainer;
       }
- 
+
       LabelControl.prototype.getDefaultPosition = function() {
         return new GControlPosition(G_ANCHOR_TOP_RIGHT, new GSize(7, 33));
       }
- 
- 
- 
+
+
+
       // === This function picks up the click and opens the corresponding info window ===
       function myclick(i) {
         GEvent.trigger(gmarkers[i], "click");
       }
- 
- 
- 
- 
+
+
+
+
       // === A function to create the marker and set up the event window ===
       var gmarkers = [];
       var side_bar_html = "";
- 
+
       function createMarker(point,name,html) {
         var marker = new GMarker(point);
         GEvent.addListener(marker, "click", function() {
@@ -63,27 +63,27 @@ some places i've called home
         side_bar_html += '<a href="javascript:myclick(' + (gmarkers.length-1) + ')">' + name + '<\/a><br>';
         return marker;
       }
- 
- 
- 
+
+
+
       // === Create the map ===
       var map = new GMap2(document.getElementById("map"));
       map.addControl(new LabelControl());
       map.addControl(new GMapTypeControl());
       map.addControl(new GLargeMapControl());
       map.setCenter(new GLatLng(0.0,0.0), 1);
- 
- 
- 
+
+
+
       // === add the points ===
       var point = new GLatLng(34.350087, -117.619262);
       var marker = createMarker(point,"Marker 1","wrightwood, california<br><br>06/1982-06/1991")
       map.addOverlay(marker);
- 
+
       var point = new GLatLng(34.140487, -117.561168);
       var marker = createMarker(point,"Marker 2","rancho cucamonga, california<br><br>06/1991-09/2000")
       map.addOverlay(marker);
- 
+
       var point = new GLatLng(32.768190, -117.188090);
       var marker = createMarker(point,"Marker 3","san diego, california<br><br>09/2000-12/2001")
       map.addOverlay(marker);
@@ -107,7 +107,7 @@ some places i've called home
       var point = new GLatLng(38.570942, -121.480652);
       var marker = createMarker(point,"Marker 8","sacramento, california<br><br>04/2007-07/2009")
       map.addOverlay(marker);
- 
+
       var point = new GLatLng(-27.448176, 153.095455);
       var marker = createMarker(point,"Marker 9","brisbane, australia<br><br>10/2008-12/2008")
       map.addOverlay(marker);
@@ -119,22 +119,19 @@ some places i've called home
       var point = new GLatLng(34.049501, -117.188803);
       var marker = createMarker(point,"Marker 11","redlands, california<br><br>11/2009-?")
       map.addOverlay(marker);
- 
-       
+
+
       // === put the assembled side_bar_html contents into the custom control ===
       labelContainer.innerHTML = side_bar_html;
- 
+
     }
- 
+
     // This Javascript is based on code provided by the
     // Community Church Javascript Team
-    // http://www.bisphamchurch.org.uk/   
+    // http://www.bisphamchurch.org.uk/
     // http://econym.org.uk/gmap/
- 
+
     //]]>
-    </script> 
-  </body> 
-</html> 
- 
- 
- 
+    </script>
+  </body>
+</html>

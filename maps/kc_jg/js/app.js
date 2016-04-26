@@ -26,7 +26,7 @@ var done = "'France', 'Switzerland', 'Morocco', 'Australia', 'Spain', 'Japan', "
 var soon = "'Australia', 'New Zealand', 'Belize', 'Costa Rica', 'India', 'Chile'";
 
 L.esri.featureLayer({
-  url: 'http://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/World_Countries_(Generalized)/FeatureServer/0',
+  url: 'https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/World_Countries_(Generalized)/FeatureServer/0',
   where: "Country IN(" + done + soon + ")",
   style: function (feature) {
     if (soon.search(feature.properties.Country) > 0) {
@@ -45,7 +45,7 @@ L.esri.featureLayer({
 }).addTo(map);
 
 L.esri.featureLayer({
-  url: 'http://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer/3',
+  url: 'https://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer/3',
   where: "STATE_NAME IN('California', 'New Jersey', 'Hawaii', 'Utah', 'Washington', 'Oregon', 'Nevada', 'Louisiana', 'Florida', 'Georgia', 'Arizona')",
   style: {
     color: '#37424A',
