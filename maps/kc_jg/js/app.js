@@ -23,7 +23,7 @@ L.esri.basemapLayer("Gray", {
 
 var done = "'France', 'Switzerland', 'Morocco', 'Australia', 'Spain', 'Japan', ";
 
-var soon = "'Australia', 'New Zealand', 'Belize', 'Costa Rica', 'India', 'Chile'";
+var soon = "'Australia', 'New Zealand', 'Belize', 'Costa Rica', 'India', 'Chile', 'Bhutan', 'Myanmar'";
 
 L.esri.featureLayer({
   url: 'https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/World_Countries_(Generalized)/FeatureServer/0',
