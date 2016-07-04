@@ -31,13 +31,13 @@ L.esri.featureLayer({
   style: function (feature) {
     if (soon.search(feature.properties.Country) > 0) {
       return {
-        color: '#F2D653',
+        color: '#60FE44',
         weight: 1.5
       }
     }
     else {
       return {
-        color: '#37424A',
+        color: '#E79F36',
         weight: 1.5
       }
     }
