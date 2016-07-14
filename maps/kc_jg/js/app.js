@@ -23,7 +23,7 @@ L.esri.basemapLayer("Gray", {
 
 var done = "'France', 'Switzerland', 'Morocco', 'Australia', 'Spain', 'Japan', ";
 
-var soon = "'Australia', 'New Zealand', 'Belize', 'Costa Rica', 'India', 'Chile'";
+var soon = "'Australia', 'New Zealand', 'Belize', 'Costa Rica', 'India', 'Chile', 'Bhutan', 'Myanmar'";
 
 L.esri.featureLayer({
   url: 'https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/World_Countries_(Generalized)/FeatureServer/0',
@@ -31,13 +31,13 @@ L.esri.featureLayer({
   style: function (feature) {
     if (soon.search(feature.properties.Country) > 0) {
       return {
-        color: '#F2D653',
+        color: '#60FE44',
         weight: 1.5
       }
     }
     else {
       return {
-        color: '#37424A',
+        color: '#E79F36',
         weight: 1.5
       }
     }
