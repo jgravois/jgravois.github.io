@@ -1,0 +1,59 @@
+<html>
+<head>
+  <meta charset=utf-8 />
+  <title>Uncle Mike</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+  <!-- Load Leaflet from CDN-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"></script>
+
+  <!-- Load Esri Leaflet from CDN -->
+  <script src="https://unpkg.com/esri-leaflet@2.0.8"></script>
+
+  <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.2.4/dist/esri-leaflet-geocoder.css">
+  <script src="https://unpkg.com/esri-leaflet-geocoder@2.2.4"></script>
+
+
+  <style>
+    body { margin:0; padding:0; }
+    #map { position: absolute; top:0; bottom:0; right:0; left:0; }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script>
+  var aerial = L.layerGroup();
+  L.esri.basemapLayer("Imagery").addTo(aerial);
+  L.esri.basemapLayer("ImageryTransportation").addTo(aerial);
+  var street = L.esri.basemapLayer("Streets")
+  var topo = L.esri.basemapLayer("Topographic")
+
+  var map = L.map("map", {
+    center: [37.333333, -118.625],
+    zoom: 15
+  })
+
+  var searchControl = L.esri.Geocoding.geosearch().addTo(map)
+
+  aerial.addTo(map)
+
+  var baseMaps = {
+    "Topographic": topo,
+    "Imagery": aerial,
+    "Streetmap": street
+  };
+
+  L.control.layers(baseMaps).addTo(map)
+
+  var mike = L.circleMarker([37.334139, -118.629153]).addTo(map)
+  mike.bindPopup('uncle mike?');
+
+  var parking = L.marker([37.334951,-118.609986]).addTo(map);
+  parking.bindPopup('parking?');
+</script>
+
+</body>
+</html>

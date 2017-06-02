@@ -1,0 +1,103 @@
+<html>
+<head>
+  <meta charset=utf-8 />
+  <title>Uncle Mike</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+  <!-- Load Leaflet from CDN-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"></script>
+
+  <!-- Load Esri Leaflet from CDN -->
+  <script src="https://unpkg.com/esri-leaflet@2.0.8"></script>
+
+  <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.2.4/dist/esri-leaflet-geocoder.css">
+  <script src="https://unpkg.com/esri-leaflet-geocoder@2.2.4"></script>
+
+
+  <style>
+    body { margin:0; padding:0; }
+    #map { position: absolute; top:0; bottom:0; right:0; left:0; }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script>
+  var topo = L.esri.basemapLayer("Topographic")
+  var aerial = L.esri.basemapLayer("Imagery")
+  var label = L.esri.basemapLayer("ImageryTransportation")
+  var street = L.esri.basemapLayer("Streets")
+
+  var map = L.map("map", {
+    center: [37.333333, -118.625],
+    zoom: 15
+  })
+
+  var searchControl = L.esri.Geocoding.geosearch().addTo(map)
+
+  aerial.addTo(map)
+  label.addTo(map)
+
+  var baseMaps = {
+    "Topographic": topo,
+    "Imagery": aerial,
+    "Streetmap": street
+  };
+
+  var overlays = {
+    "Highways": label
+  }
+
+  L.control.layers(baseMaps, overlays).addTo(map)
+
+  var welcomeText = 'Records from 2003 indicate that Michael Jezik\'s remains were found at: ' +
+  '118&deg; 37\'30\"W, ' +
+  '37&deg; 20\'00\"N<br><br>' +
+  'if you can identify a more accurate location using the aerial photography, drag the thumbtack there'
+
+  var mike = L.marker([37.333333, -118.625], {
+    draggable: true
+  })
+    .bindPopup(welcomeText)
+    .addTo(map)
+  mike.openPopup()
+
+  mike.on('moveend', function (e) {
+    newCoords = e.target.getLatLng();
+    var newLat = newCoords.lat.toFixed(6);
+    var newLng = newCoords.lng.toFixed(6);
+
+    var emailMessage = 'mailto:jagravois@gmail.com?subject=more%20accurate%20coordinates&body=hi%20john%2C%20the%20coordinates%20below%20are%20a%20little%20more%20accurate%20than%20the%20ones%20on%20record.%20' +
+    + newLat + '%2C%20' + newLng;
+
+    e.target.setPopupContent(
+      'the updated coordinates are: ' +
+      newLat + '&deg;, ' + newLng + '&deg;<br>' +
+      'click this <a href=' + emailMessage + '>link</a> to send an email with the corrected coordinates.' +
+      '<br><br>' +
+      'or click <a onclick="goBack()">here</a> to start over.'
+    )
+    e.target.openPopup();
+  })
+
+  function goBack () {
+    mike.setPopupContent(welcomeText)
+    mike.setLatLng([37.333333, -118.625])
+  }
+
+  /*
+rural inyo
+mountainside
+
+-118.36183333333333
+33.69081666666667
+
+-118 21.710
+33N 41.449
+  */
+</script>
+
+</body>
+</html>
