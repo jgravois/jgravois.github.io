@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width">
   <title>johngravois.com</title>
   <link rel="stylesheet" href="/css/style.css"/>
+  <script src="https://twemoji.maxcdn.com/2/twemoji.min.js?11.3"></script>
 </head>
 <body>
   <div class="container">
@@ -12,49 +13,56 @@
       <p>johngravois.com</p>
     </div>
     <div class="main-1 emoji graphing-paper">
-
-      <p role="image" aria-label="bird">
+      <p title="twitter" role="image" aria-label="bird">
         <a href="https://twitter.com/geogangster">🐦</a>
       </p>
-      <p role="image" aria-label="laptop">
+      <p title="github" role="image" aria-label="laptop">
         <a href="https://github.com/jgravois">💻</a>
       </p>
 
-      <p role="image" aria-label="heart">
+      <p title="wifey" role="image" aria-label="heart">
         <a href="https://www.instagram.com/kaciegravy/">🤰🏻</a>
       </p>
-      <p role="image" aria-label="camera">
+      <p title="flickr" role="image" aria-label="camera">
         <a href="https://www.flickr.com/photos/geogangster/">📷</a>
       </p>
-      <p role="image" aria-label="envelope">
+      <p title="newsletter" role="image" aria-label="envelope">
         <a href="https://tinyletter.com/johngravois">📨</a>
       </p>
-      <p role="image" aria-label="radio">
+      <p title="spotify" role="image" aria-label="radio">
         <a href="https://open.spotify.com/user/geogangster">📻</a>
       </p>
     </div>
     <div class="main-2 emoji graphing-paper">
-      <p role="image" aria-label="christmas tree">
+      <p title="xmas letters" role="image" aria-label="christmas tree">
         <a href="/xmas2018/">🎄</a>
       </p>
-      <p role="image" aria-label="globe americas">
+      <p title="peru recap" role="image" aria-label="globe americas">
         <a href="/peru2014/">🌎</a>
       </p>
-      <p role="image" aria-label="fax machine">
+      <p title="resume" role="image" aria-label="fax machine">
         <a href="/resume/">📠</a>
       </p>
-      <p role="image" aria-label="champagne">
+      <p title="wedding speech" role="image" aria-label="champagne">
         <a href="/presentations/bestman.html">🍾</a>
       </p>
-      <p role="image" aria-label="bicycle">
+      <p title="bikebbq" role="image" aria-label="bicycle">
         <a href="http://www.bikebbq.com">🚲</a>
       </p>
-      <p role="image" aria-label="selfie">
+      <p title="insta" role="image" aria-label="selfie">
         <a href="https://www.instagram.com/john.gravois/">🤳</a>
       </p>
     </div>
     <div class="l-gutter graphing-paper"></div>
     <div class="r-gutter graphing-paper"></div>
   </div>
+  <script>
+  // chrome developer tools were overly optimistic about the mobile browsers ability to display normal emoji
+  var links = document.getElementsByTagName("a")
+
+  for (var i=0; i<links.length;i++) {
+    links[i].innerHTML = twemoji.parse(links[i].innerHTML)
+  }
+  </script>
 </body>
 </html>
