@@ -40,10 +40,12 @@ body {
 
 .main-1 {
   grid-area: main-1;
+  padding-top: 36px;
 }
 
 .main-2 {
   grid-area: main-2;
+  padding-top: 36px;
 }
 
 .gutter {

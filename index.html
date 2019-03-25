@@ -12,7 +12,7 @@
     <div class="header">
       <h1>johngravois.com</h1>
     </div>
-    <div class="main-1 emoji graphing-paper">
+    <div class="main-1 emoji">
       <p title="twitter" role="image" aria-label="bird">
         <a href="https://twitter.com/geogangster">🐦</a>
       </p>
@@ -33,12 +33,12 @@
         <a href="https://open.spotify.com/user/geogangster">📻</a>
       </p>
     </div>
-    <div class="main-2 emoji graphing-paper">
+    <div class="main-2 emoji">
       <p title="xmas letters" role="image" aria-label="christmas tree">
-        <a href="/xmas2018/">🎄</a>
+        <a href="/xmas/2018/">🎄</a>
       </p>
       <p title="peru recap" role="image" aria-label="globe americas">
-        <a href="/peru2014/">🌎</a>
+        <a href="/travel/2014/">🌎</a>
       </p>
       <p title="resume" role="image" aria-label="fax machine">
         <a href="/resume/">📠</a>
@@ -49,7 +49,7 @@
       <p title="bikebbq" role="image" aria-label="bicycle">
         <a href="http://www.bikebbq.com">🚲</a>
       </p>
-      <p title="insta" role="image" aria-label="selfie">
+      <p title="instagram" role="image" aria-label="selfie">
         <a href="https://www.instagram.com/john.gravois/">🤳</a>
       </p>
     </div>
@@ -62,7 +62,6 @@
   <script>
   // chrome developer tools were overly optimistic about the mobile browsers ability to display normal emoji
   var links = document.getElementsByTagName("a")
-
   for (var i=0; i<links.length;i++) {
     links[i].innerHTML = twemoji.parse(links[i].innerHTML)
   }
