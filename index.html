@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <meta name="Description" content="the homepage of the second most famous john gravois.">
+  <meta name="Description" content="homepage of the second most famous john gravois.">
   <title>johngravois.com</title>
   <link rel="stylesheet" href="/css/style.css"/>
 </head>
@@ -29,14 +29,16 @@
       <p><a title="instagram" aria-label="selfie" href="https://www.instagram.com/john.gravois/">🤳</a></p>
     </div>
     <div class="footer">
-      <p>&copy; john</p>
+      <p aria-label="heart">
+        <small>made with ❤️</small>
+      </p>
     </div>
     <div class="l-gutter gutter"></div>
     <div class="r-gutter gutter"></div>
   </div>
   <script src="https://twemoji.maxcdn.com/2/twemoji.min.js?11.3"></script>
   <script>
-  // chrome developer tools were overly optimistic about the mobile browsers ability to display normal emoji
+  // apparently chrome on android wont display "real" emoji
   var links = document.getElementsByTagName("a")
   for (var i=0; i<links.length;i++) {
     links[i].innerHTML = twemoji.parse(links[i].innerHTML)
