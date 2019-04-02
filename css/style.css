@@ -5,7 +5,7 @@ body {
 
 .container {
   display: grid;
-  grid-template-columns: 30% 20% 20% 30%;
+  grid-template-columns: auto 250px 250px auto;
   grid-template-rows: 72px auto 48px;
   grid-template-areas:
     "l-gutter header header r-gutter"
@@ -15,12 +15,6 @@ body {
   text-align: center;
   background-size: 8px 8px;
   background-image: linear-gradient(to right, grey 0.1px, transparent 1px), linear-gradient(to bottom, grey 0.5px, transparent 1px);
-}
-
-@media (max-width: 800px) {
-  .container {
-    grid-template-columns: 20% 30% 30% 20%;
-  }
 }
 
 @media (max-width: 500px) {
