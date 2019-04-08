@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
@@ -7,21 +7,22 @@
   <link rel="stylesheet" href="/css/resume.css"/>
 </head>
 <body>
-	<script type="text/javascript">
-		function email() { // try to avoid spam trollers, intentionally complex
-			var a = "joh";
-			var b = "n@";
-			var c = "bikebb";
-			var d = "q.com";
+<script>
+	// say no to spam
+	function email() {
+		const a = "joh";
+		const b = "n@";
+		const c = "bikebb";
+		const d = "q.com";
 
-			e_string = "<a href=\"mai" + "lto:" + a + b + c + d + "\">" + a + b + c + d + "</a>";
-			document.write(e_string);
-		}
-	</script>
+		e_string = "<a href=mai" + `lto:${a}${b}${c}${d}>${a}${b}${c}${d}</a>`;
+		document.write(e_string);
+	}
+</script>
 	<div class="container">
 		<div class="header">
 			<h3>John Gravois</h3>
-			<script type="text/javascript">email();</script>
+			<script>email();</script>
 		</div>
 
 		<div class="objective">
@@ -31,12 +32,11 @@
 		</div>
 
 		<div class="l-job-1 mobile-justified">
-			<p><small>2009-Present</small></p>
+			<p>2009-Present</p>
 		</div>
 		<div class="r-job-1 justified">
-			<p><small>Redlands, California</small></p>
+			<p>Redlands, California</p>
 		</div>
-
 		<div class="job-1">
 			<h4><a href="http://www.esri.com/">Esri</a></h4>
 			<p>The world leader in spatial modeling and mapping software.</p>
@@ -95,7 +95,7 @@
 			</ul>
 		</div>
 
-		<div class="ed">
+		<div class="education">
 			<h3 class="breaker">EDUCATION &amp; INTERESTS</h3>
 			<ul>
 				<li>B.S Geography/GIS Magna Cum Laude, Cal Poly Pomona 2006</li>
@@ -106,7 +106,7 @@
 		</div>
 		<div class="footer">
 			<p>References available upon request.</p>
- 			<p>Valid <a href="http://validator.w3.org/check/referer">XHTML 1.1</a> / <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a>
+ 			<p><small>Valid <a href="https://validator.w3.org/check/referer">XHTML</a> / <a href="https://jigsaw.w3.org/css-validator/check/referer">CSS 3.0</a></small>
 			</p>
 		</div>
 	</div>
