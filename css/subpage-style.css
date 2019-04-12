@@ -11,7 +11,8 @@ body {
     "l-gutter main r-gutter";
   font-family: 'Courier New', Courier, monospace;
   text-align: center;
-  color: #000000;
+  background-color: #7e7e7e;
+  color: white;
 }
 
 .main {

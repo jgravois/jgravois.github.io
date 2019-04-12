@@ -15,7 +15,8 @@ body {
     '. education .'
     '. footer .';
   font-family: 'Courier New', Courier, monospace;
-  background-color: rgba(180, 180, 180, 0.5);
+  background-color: #7e7e7e;
+  color: white;
   padding: 25px;
 }
 
