@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <meta name="Description" content="homepage of the second most famous john gravois.">
+  <meta name="Description" content="homepage of the lesser known john gravois.">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="/css/style.css"/>
 </head>
 <body>
-  <div class="container">
+  <div class="home-page-container">
     <div class="header">
       <h1>johngravois.com</h1>
     </div>
@@ -28,7 +28,7 @@
       <p><a title="xmas letters" aria-label="christmas tree" href="/xmas/2018/">🎄</a></p>
       <p><a title="peru recap" aria-label="globe americas" href="/travel/2014/">🌎</a></p>
       <p><a title="wifey" aria-label="pregnant woman" href="https://www.instagram.com/kaciegravy/">🤰🏻</a></p>
-      <p><a title="flickr" aria-label="camera" href="https://www.flickr.com/people/geogangster/">📷</a></p>
+      <p><a title="flickr" aria-label="camera" href="https://www.flickr.com/photos/geogangster/">📷</a></p>
       <p><a title="wedding speech" aria-label="champagne bottle" href="/words/2013/best-man/">🍾</a></p>
       <p><a title="instagram" aria-label="selfie" href="https://www.instagram.com/john.gravois/">🤳</a></p>
     </div>
@@ -42,11 +42,16 @@
   </div>
   <script src="https://twemoji.maxcdn.com/2/twemoji.min.js?11.3"></script>
   <script>
-  // apparently chrome on android wont display "real" emoji
-  var links = document.getElementsByTagName("a")
-  for (var i=0; i<links.length;i++) {
-    links[i].innerHTML = twemoji.parse(links[i].innerHTML)
-  }
+    var ua = navigator.userAgent;
+
+    // https://stackoverflow.com/questions/25393865/how-do-you-detect-between-a-desktop-and-mobile-chrome-user-agent
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(ua)) {
+      var links = document.getElementsByTagName("a")
+      for (var i=0; i<links.length;i++) {
+        // chrome on android doesnt display "real" emoji, swap in images instead
+        links[i].innerHTML = twemoji.parse(links[i].innerHTML)
+      }
+    }
   </script>
 </body>
 </html>

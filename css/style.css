@@ -3,7 +3,7 @@ body {
   padding:0;
 }
 
-.container {
+.home-page-container {
   display: grid;
   grid-template-columns: auto 250px 250px auto;
   grid-template-rows: 72px auto 48px;
@@ -19,7 +19,7 @@ body {
 }
 
 @media (max-width: 500px) {
-  .container {
+  .home-page-container {
     grid-template-columns: 50% 50%;
     grid-template-areas:
     'header header'
@@ -28,9 +28,34 @@ body {
   }
 }
 
+.one-column-container {
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 0.5fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "l-gutter main r-gutter";
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+  background-color: #7e7e7e;
+  color: white;
+}
+
+@media (max-width: 500px) {
+  .one-column-container {
+    grid-template-columns: 10% 80% 10%;
+    grid-template-areas:
+      "l-gutter main r-gutter";
+    min-height: 800px;
+  }
+}
+
 .header {
   background-color: rgb(255, 174, 0);
   grid-area: header;
+}
+
+.main {
+  grid-area: main;
 }
 
 .main-1 {
@@ -64,4 +89,122 @@ body {
   font-size: 6rem;
   vertical-align: middle;
   text-decoration: none;
+}
+
+.main > img {
+  object-fit: cover;
+  width: 100%;
+}
+
+
+.resume-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-areas:
+    'resume-header objective .'
+    'l-job-1 job-1 r-job-1'
+    'l-job-2 job-2 r-job-2'
+    'l-job-3 job-3 r-job-3'
+    '. skills .'
+    '. education .'
+    '. resume-footer .';
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #7e7e7e;
+  color: white;
+  padding: 25px;
+}
+
+@media (max-width: 800px) {
+  .resume-container {
+    grid-template-columns: auto;
+    /* a (probably goofy) way to tighten the job header gaps */
+    grid-template-rows: auto auto 25px auto auto 25px auto auto 25px;
+    grid-template-areas:
+      'resume-header'
+      'objective'
+      'l-job-1'
+      'r-job-1'
+      'job-1'
+      'l-job-2'
+      'r-job-2'
+      'job-2'
+      'l-job-3'
+      'r-job-3'
+      'job-3'
+      'skills'
+      'education'
+      'resume-footer';
+  }
+
+  .mobile-justified {
+    text-align: end;
+  }
+
+  .justified {
+    border-bottom: 1px dotted #666;
+  }
+}
+
+.resume-header {
+  grid-area: resume-header;
+}
+
+.objective {
+  grid-area: objective;
+}
+
+.l-job-1 {
+  grid-area: l-job-1;
+}
+
+.job-1 {
+  grid-area: job-1;
+}
+
+.r-job-1 {
+  grid-area: r-job-1;
+}
+
+.l-job-2 {
+  grid-area: l-job-2;
+}
+
+.job-2 {
+  grid-area: job-2;
+}
+
+.r-job-2 {
+  grid-area: r-job-2;
+}
+
+.l-job-3 {
+  grid-area: l-job-3;
+}
+
+.job-3 {
+  grid-area: job-3;
+}
+
+.r-job-3 {
+  grid-area: r-job-3;
+}
+
+.skills {
+  grid-area: skills;
+}
+
+.education {
+  grid-area: education;
+}
+
+.resume-footer {
+  grid-area: resume-footer;
+}
+
+.breaker {
+  border-bottom: 1px solid #666;
+}
+
+.justified {
+  text-align: end;
 }
