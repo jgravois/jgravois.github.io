@@ -1,0 +1,4 @@
+body {background-color: black}
+h6 {font-family:helvetica; color:white; font-size:12pt; margin-left: 100px}
+p {font-family:helvetica; color:white; font-size:12pt; margin-left: 100px}
+a:link     {color:yellow}

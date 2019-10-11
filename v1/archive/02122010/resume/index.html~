@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+        "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!-- HTML Resume Template from http://www.alexking.org/software/resume/ -->
+<html>
+<head>
+<title>John Gravois Resume</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<style type="text/css" media="screen">
+body {
+	margin: 10px;
+}
+p, td, span, li, a { 
+	font-family: verdana, arial, helvetica, sans-serif; 
+}
+h1 {
+	font: 90% verdana, arial, helvetica, sans-serif;
+	font-weight: bold;
+	margin: 0 0 5px 0;
+}
+h2 {
+	border-bottom: 1px solid #666;
+	clear: both;
+	font: 80% verdana, arial, helvetica, sans-serif;
+	font-weight: bold;
+	margin: 15px 0 10px 0;
+	padding: 0 0 3px 0;
+	width: 700px;
+}
+h3 {
+	float: left;
+	font: 80% verdana, arial, helvetica, sans-serif;
+	font-weight: bold;
+	margin: 0 0 5px 0;
+	padding: 0;
+	width: 446px;
+}
+li {
+	font-size: 70%;
+	margin: 0 0 3px 20px;
+	padding: 0;
+}
+p {
+	font-size: 70%;
+	margin: 0 0 10px 0;
+	padding: 0;
+	width: 575px;
+}
+body ul {
+	margin: 0 0 0 125px;
+	padding: 0;
+	width: 575px;
+}
+body div ul {
+	margin: 3px 0 0 0;
+	padding: 0;
+	width: 575px;
+}
+#bio_left {
+	font-size: 75%;
+	float: left;
+	width: 350px;
+}
+#bio_right {
+	font-size: 75%;
+	float: left;
+	text-align: right;
+	width: 350px;
+}
+.company {
+	clear: both;
+	margin: 0 0 5px 0;
+	padding: 0;
+}
+.data {
+	padding-left: 125px;
+}
+.date {
+	clear: left;
+	float: left;
+	padding-top: 2px;
+	width: 125px;
+}
+.job {
+	clear: both;
+	width: 700px;
+}
+.job_data {
+	float: left;
+	width: 575px;
+}
+.location {
+	clear: right;
+	float: left;
+	text-align: right;
+	width: 125px;
+}
+.position {
+	font-style: italic;
+	margin: 0 0 5px 0;
+}
+#references {
+	margin-top: 20px;
+}
+#meta {
+	margin-top: 30px;
+}
+</style>
+<style type="text/css" media="print">
+body {
+	margin: 0px;
+}
+p, td, span, li, a { 
+	font-family: verdana, arial, helvetica, sans-serif; 
+}
+h1 {
+	font: 14pt verdana, arial, helvetica, sans-serif;
+	font-weight: bold;
+	margin: 0 0 5px 0;
+}
+h2 {
+	border-bottom: 1px solid #666;
+	clear: both;
+	font: 11pt verdana, arial, helvetica, sans-serif;
+	font-weight: bold;
+	margin: 15px 0 10px 0;
+	padding: 0 0 3px 0;
+	width: 100%;
+}
+h3 {
+	font: 11pt verdana, arial, helvetica, sans-serif;
+	font-weight: bold;
+	margin: 0 0 2px 0;
+	padding: 0;
+}
+li {
+	font-size: 10pt;
+	margin: 0 0 3px 5%;
+	padding: 0;
+}
+p {
+	font-size: 10pt;
+	margin: 0 0 10px 0;
+	padding: 0;
+}
+body ul {
+	margin: 0 0 0 20%;
+	padding: 0;
+}
+body div ul {
+	margin: 3px 0 0 0;
+	padding: 0;
+}
+#bio_left {
+	font-size: 11pt;
+	float: left;
+	width: 50%;
+}
+#bio_right {
+	font-size: 11pt;
+	float: left;
+	text-align: right;
+	width: 50%;
+}
+.company {
+	clear: both;
+	margin: 0 0 5px 0;
+	padding: 0;
+}
+.data {
+	padding-left: 20%;
+}
+.date {
+	clear: left;
+	float: left;
+	padding-top: 2px;
+	width: 20%;
+}
+.job {
+	clear: both;
+	width: 100%;
+}
+.job_data {
+	float: left;
+	width: 80%;
+}
+.location {
+	clear: right;
+	float: right;
+	text-align: right;
+	width: 20%;
+}
+.position {
+	font-style: italic;
+	margin: 0 0 5px 0;
+}
+#references {
+	margin-top: 20px;
+}
+#meta {
+	display: none;
+}
+</style>
+<script type="text/javascript">
+function email() { // try to avoid spam trollers, intentionally complex
+	var a = "jagr";
+	var b = "avois";
+	var c = "@gma";
+	var d = "il.com";
+	
+	e_string = "<a href=\"ma" + "ilto:" + a + b + c + d + "\">" + a + b + c + d + "</a>";
+	document.write(e_string);
+}
+</script>
+</head>
+
+<body>
+
+<h1>John Gravois</h1>
+
+<p id="bio_left">
+(909) 477-9948<br />	<script type="text/javascript">email();</script>
+</p>
+<p id="bio_right">
+140 S Center Street<br />Redlands, California 92373</p> 
+
+<h2>OBJECTIVE</h2>
+<p class="data">To find a job as a GIS Web Developer.</p>
+
+<h2>EXPERIENCE</h2>
+<div class="job">
+	<p class="date">2009-Present</p>
+	<div class="job_data">
+		<h3><a href="http://www.esri.com/">Environmental Systems Research Institute</a></h3> 
+		<p class="location">Redlands, California</p> 
+		<p class="company">The world leader in GIS (geographic information systems) spatial modeling and mapping software.</p> 
+		<p class="position">Support Analyst</p> 
+		<ul>
+			<li>Provide high-quality support to end users of ESRI software to solve technical problems quickly and effectively.</li>
+			<li>Document technical issues through incident tracking, Knowledge Base articles, and submission of software defect/enhancement requests.</li>
+			<li>Determine or recommend software changes to programmers/software engineers.</li>
+		</ul>
+		&nbsp;
+		</div>
+</div>
+
+<div class="job">
+	<p class="date">2008-Present</p>
+	<div class="job_data">
+		<h3><a href="http://www.ceert.org/">Center For Energy Efficiency and Renewable Technology</a></h3> 
+		<p class="location">Sacramento, California</p> 
+		<p class="company"> A nonprofit public-benefit organization.</p> 
+		<p class="position">GIS Consultant</p> 
+		<ul>
+			<li>Train staff in the use of ArcGIS Desktop software</li>
+			<li>Supervise spatial data modeling</li>
+			</ul>
+		&nbsp;
+		</div>
+</div>
+
+<div class="job">
+	<p class="date">2007-2009</p>
+	<div class="job_data">
+		<h3><a href="http://www.wallace-kuhl.com/">Wallace Kuhl & Associates</a></h3> 
+		<p class="location">West Sacramento, California</p> 
+		<p class="company">Environmental and Geotechnical Consultants.</p> 
+		&nbsp;
+		<p class="position">GIS Specialist</p> 
+		<ul>
+			<li>Purchased, created, adapted and managed all spatial datasets</li>
+			<li>Oversaw all Cartographic output</li>
+			<li>Supervised GPS data collection (Trimble Pathfinder and ArcPad 7.1</li>
+			<li>Trained drafting staff in the use of ArcGIS Desktop software for map production</li>
+		</ul>
+		&nbsp;
+	</div>
+</div>
+
+<h2>SKILLS &amp; TECHNOLOGIES  </h2>
+<ul>
+	<li>ArcGIS Desktop/SDE/Server, ArcPad, SQL Server 2005, AutoCAD 2007, Adobe CS, Trimble Pathfinder Office, Erdas Imagine, Leica Geosystems, gINT, Surfer, MS Office, Linux</li>
+	<li>Extensive experience with ArcGIS Desktop training, Geodatabase design, software licensing, hardware-related issues and needs assessment</li> 
+	<li>Familiarity with Python, HTML/CSS, Visual Basic, Javascript, ArcObjects</li>
+</ul>
+
+<h2>EDUCATION &amp; INTERESTS</h2>
+<ul>
+	<li><b>B.S. Geography (option GIS) Magna Cum Laude, Cal Poly Pomona 2006</b></li>
+	<li>BAAMA/URISA</li>
+	<li><a href="http://sacbikekitchen.org/">Sacramento Bicycle Kitchen</a></li>
+	<li>Pedal Movement</li>
+	<li><a href="http://www.bikeleague.org/">League of American Bicyclists - Instructor #2307</a></li>
+</ul>
+
+<p id="references">References available upon request.</p>
+
+<p id="meta">
+	<span id="valid">Valid <a href="http://validator.w3.org/check/referer">XHTML 1.1</a> / <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS 2.0</a></span>
+</p>
+
+</body>
+</html>

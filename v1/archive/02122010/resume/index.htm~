@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+        "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"> 
+<!-- HTML Resume Template from http://www.alexking.org/software/resume/ --> 
+<html> 
+<head> 
+<title>John Gravois Resume</title> 
+<meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
+<style type="text/css" media="screen"> 
+	@import url(http://alexking.org/site/projects/html-resume-template/demo/resume.php?output=css_screen);
+</style> 
+<link rel="stylesheet" type="text/css" media="print" href="http://alexking.org/site/projects/html-resume-template/demo/resume.php?output=css_print" /> 
+<script type="text/javascript" src="http://alexking.org/site/projects/html-resume-template/demo/resume.php?output=js"></script> 
+</head> 
+ 
+<body> 
+ 
+<h1>John Gravois</h1> 
+ 
+<p id="bio_left"> 
+(909) 477-9948<br />	<script type="text/javascript">email();</script> 
+</p> 
+<p id="bio_right"> 
+140 S Center Street<br />Redlands, California 92373</p> 
+ 
+<h2>OBJECTIVE</h2> 
+<p class="data">To pursue a career...</p> 
+ 
+<h2>EXPERIENCE</h2> 
+<div class="job"> 
+	<p class="date">2009-Present</p> 
+	<div class="job_data"> 
+		<h3><a href="http://www.esri.com/">Environmental Systems Research Institute</a></h3> 
+		<p class="location">Redlands, California</p> 
+		<p class="company">The world leader in GIS (geographic information systems) spatial modeling and mapping software.</p> 
+		<p class="position">Support Analyst</p> 
+		<ul> 
+			<li>Responsibility description</li> 
+			<li>Accomplishment description #1</li> 
+			<li>Accomplishment #2</li> 
+		</ul> 
+		&nbsp;
+	</div> 
+</div> 
+ 
+<div class="job"> 
+	<p class="date">1995-2000</p> 
+	<div class="job_data"> 
+		<h3>Company Name</h3> 
+		<p class="location">City, State</p> 
+		<p class="company">Company description.</p> 
+		<p class="position">Position/Title</p> 
+		<ul> 
+			<li>Responsibility description</li> 
+			<li>Accomplishment description #1</li> 
+			<li>Accomplishment #2</li> 
+		</ul> 
+		&nbsp;
+	</div> 
+</div> 
+ 
+<h2>SKILLS, TECHNOLOGIES &amp; PROJECTS</h2> 
+<ul> 
+	<li>Skill description #1</li> 
+	<li>Skill description #2</li> 
+	<li>Skill description #3</li> 
+</ul> 
+ 
+<h2>EDUCATION &amp; INTERESTS</h2> 
+<ul> 
+	<li>Degree description</li> 
+	<li>Interest description</li> 
+	<li>Accomplishment of note</li> 
+</ul> 
+ 
+<p id="references">References available upon request.</p> 
+ 
+<p id="meta"> 
+	<span id="versions"><a href="/site/projects/html-resume-template/demo/resume.php">HTML version</a> | <a href="/site/projects/html-resume-template/demo/resume.php?output=html&amp;contained=1">E-mailable HTML version</a> | <a href="/site/projects/html-resume-template/demo/resume.php?output=text">Plain Text (.txt) version</a>.</span> 
+	<span id="valid">Valid <a href="http://validator.w3.org/check/referer">XHTML 1.1</a> / <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS 2.0</a></span> 
+</p> 
+ 
+</body> 
+</html> 
