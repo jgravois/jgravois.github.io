@@ -6,3 +6,11 @@ body {
   width: 100%;
   max-width: 800px;
 }
+
+a {
+  word-wrap: break-word;
+}
+
+li {
+  text-align: left;
+}
