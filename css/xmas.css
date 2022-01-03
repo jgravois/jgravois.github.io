@@ -7,7 +7,7 @@ body {
   max-width: 800px;
 }
 
-a {
+a, strike {
   word-wrap: break-word;
 }
 
