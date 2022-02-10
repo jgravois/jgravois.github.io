@@ -1,8 +1,0 @@
-<html>
-<head>
-<link rel= "stylesheet" type="text/css"
-href="style1.css" />
-<body><iframe width="1000" height="450" frameborder="20" scrolling="yes" marginheight="20" marginwidth="20" src="http://maps.google.com/maps/ms?ie=UTF8&amp;hl=en&amp;msa=0&amp;msid=110724272178759168599.0004432dece86335d513f&amp;ll=37.783876,-122.439709&amp;spn=0.061051,0.171661&amp;z=13&amp;output=embed"></iframe>
-</body>
-</html>
-
