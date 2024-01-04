@@ -43,18 +43,5 @@
     <div class="l-gutter gutter"></div>
     <div class="r-gutter gutter"></div>
   </div>
-  <script src="https://twemoji.maxcdn.com/2/twemoji.min.js?11.3"></script>
-  <script>
-    var ua = navigator.userAgent;
-
-    // https://stackoverflow.com/questions/25393865/how-do-you-detect-between-a-desktop-and-mobile-chrome-user-agent
-    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(ua)) {
-      var links = document.getElementsByTagName("a")
-      for (var i=0; i<links.length;i++) {
-        // chrome on android doesnt display "real" emoji, swap in images instead
-        links[i].innerHTML = twemoji.parse(links[i].innerHTML)
-      }
-    }
-  </script>
 </body>
 </html>
