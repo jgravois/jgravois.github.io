@@ -105,6 +105,7 @@ body {
     'l-job-1 job-1 r-job-1'
     'l-job-2 job-2 r-job-2'
     'l-job-3 job-3 r-job-3'
+    'l-job-4 job-4 r-job-4'
     '. skills .'
     '. education .'
     '. resume-footer .';
@@ -131,6 +132,9 @@ body {
       'l-job-3'
       'r-job-3'
       'job-3'
+      'l-job-4'
+      'r-job-4'
+      'job-4'
       'skills'
       'education'
       'resume-footer';
@@ -188,6 +192,18 @@ body {
 
 .r-job-3 {
   grid-area: r-job-3;
+}
+
+.l-job-4 {
+  grid-area: l-job-4;
+}
+
+.job-4 {
+  grid-area: job-4;
+}
+
+.r-job-4 {
+  grid-area: r-job-4;
 }
 
 .skills {
